@@ -17,14 +17,13 @@ print ('Number of arguments:', len(sys.argv), 'arguments.')
 print ('Argument List:', str(sys.argv))
 
 
+wkdir=str(sys.argv[1])+'/'
 
-file_name='results/visual_output_'
-keyFile = '../samples_list.txt'
+file_name = wkdir+'visual_output_'
+cnv_calls= wkdir+str(sys.argv[2])
+loci_coordinates= wkdir+str(sys.argv[3])
+keyFile = wkdir+str(sys.argv[4])
 
-
-
-cnv_calls=str(sys.argv[1])
-loci_coordinates=str(sys.argv[2])
 print(cnv_calls)
 print(loci_coordinates)
 
