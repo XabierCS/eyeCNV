@@ -11,6 +11,24 @@ from PyQt5 import QtCore, QtGui
 import tabix
 import pyqtgraph as pg
 
+from subprocess import Popen, PIPE
+
+def bgzip(filename):
+    """Call bgzip to compress a file."""
+    Popen(['bgzip', '-f', filename])
+
+def tabix_index(filename,
+        preset="gff", chrom=1, start=4, end=5, skip=0, comment="#"):
+    """Call tabix to create an index for a bgzip-compressed file."""
+    Popen(['tabix', '-p', preset, '-s', chrom, '-b', start, '-e', end,
+        '-S', skip, '-c', comment])
+
+def tabix_query(filename, chrom, start, end):
+    """Call tabix and generate an array of strings for each line it returns."""
+    query = '{}:{}-{}'.format(chrom, start, end)
+    process = Popen(['tabix', '-f', filename, query], stdout=PIPE)
+    for line in process.stdout:
+        yield line.strip().split()
 
 
 print ('Number of arguments:', len(sys.argv), 'arguments.')
@@ -226,9 +244,9 @@ class Window(QWidget):
       #print(path2)
       #pathFull=self.mergePath(wd2,path2)
       print(pathFull)
-      tb = tabix.open(pathFull)
+
       try: 
-        SampleRaw = pd.DataFrame(tb.query(str(chrX), 0, int(250e6))) # To get the entire chr
+        SampleRaw = pd.DataFrame(tabix_query(pathFull,str(chrX), 0, int(250e6))) # To get the entire chr
         print('Sample with succesfull tabix file: '+ pathFull)
       except:
         print('Cannot print sample')
