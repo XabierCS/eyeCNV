@@ -8,7 +8,6 @@ import numpy as np
 import os
 from PyQt5.QtGui import QImage
 from PyQt5 import QtCore, QtGui
-import tabix
 import pyqtgraph as pg
 
 from subprocess import Popen, PIPE
