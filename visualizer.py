@@ -247,6 +247,7 @@ class Window(QWidget):
       try: 
         SampleRaw = pd.DataFrame(tabix_query(pathFull,str(chrX), 0, int(250e6))) # To get the entire chr
         print('Sample with succesfull tabix file: '+ pathFull)
+	SampleRaw = SampleRaw.astype(float) # Deal with NaN by changing type to float
       except:
         print('Cannot print sample')
         print('Error file'+pathFull)
