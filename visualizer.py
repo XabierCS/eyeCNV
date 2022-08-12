@@ -255,11 +255,11 @@ class Window(QWidget):
         self.plotError()
       
       if LRRtype == 'GC_NO':
-		SampleRaw=SampleRaw.rename({0:'chr',1:'Pos',2:'Pos2',3:'LRR',4:'BAF',5:'LRRt'},axis=1)
+        SampleRaw=SampleRaw.rename({0:'chr',1:'Pos',2:'Pos2',3:'LRR',4:'BAF',5:'LRRt'},axis=1)
 		
 
       if LRRtype == 'GC_YES':
-		SampleRaw=SampleRaw.rename({0:'chr',1:'Pos',2:'Pos2',3:'LRRt',4:'BAF',5:'LRR'},axis=1)
+        SampleRaw=SampleRaw.rename({0:'chr',1:'Pos',2:'Pos2',3:'LRRt',4:'BAF',5:'LRR'},axis=1)
 		
       SampleRaw=SampleRaw.dropna(axis=0, thresh=1) # Remove rows with any columns with NaN
       print('testing............')
