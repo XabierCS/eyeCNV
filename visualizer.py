@@ -40,6 +40,7 @@ file_name = wkdir+'visual_output_'
 cnv_calls= wkdir+str(sys.argv[2])
 loci_coordinates= wkdir+str(sys.argv[3])
 keyFile = wkdir+str(sys.argv[4])
+LRRtype = str(sys.argv[5])
 
 print(cnv_calls)
 print(loci_coordinates)
@@ -253,8 +254,13 @@ class Window(QWidget):
         print('Error file'+pathFull)
         self.plotError()
       
+      if LRRtype == 'GC_NO':
+		SampleRaw=SampleRaw.rename({0:'chr',1:'Pos',2:'Pos2',3:'LRR',4:'BAF',5:'LRRt'},axis=1)
+		
 
-      SampleRaw=SampleRaw.rename({0:'chr',1:'Pos',2:'Pos2',3:'LRR',4:'BAF',5:'LRRt'},axis=1)
+      if LRRtype == 'GC_YES':
+		SampleRaw=SampleRaw.rename({0:'chr',1:'Pos',2:'Pos2',3:'LRRt',4:'BAF',5:'LRR'},axis=1)
+		
       SampleRaw=SampleRaw.dropna(axis=0, thresh=1) # Remove rows with any columns with NaN
       print('testing............')
       print(SampleRaw)      
