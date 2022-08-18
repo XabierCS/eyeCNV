@@ -17,7 +17,7 @@ singularity pull ibpcnv.simg docker://sinomem/docker_cnv_protocol:latest
 git clone https://github.com/XabierCS/eyeCNV.git
 
 singularity exec ibpcnv.simg python3 /opt/eyeCNV/visualizer.py \
-    path/to/eyeCNV/toy_data/ put_cnvs.txt loci.txt samples_list.txt GC_YES
+    path/to/eyeCNV/toy_data/ put_cnv.txt loci.txt samples_list.txt GC_YES
 ```
 
 
