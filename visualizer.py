@@ -49,7 +49,7 @@ print(loci_coordinates)
 class Window(QWidget):
     def __init__(self, parent=None):
         super(Window, self).__init__(parent)
-        self.lociX="None"
+        self.lociX=" "
         self.fname =0
         self.setWindowTitle('DeepEye')
         #self.setStyleSheet("background:rgb(100, 255, 102);")
