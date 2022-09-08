@@ -139,7 +139,7 @@ class Window(QWidget):
 
 
         # Letmedoit
-        self.bLetme = QPushButton('Let me do it', self)
+        self.bLetme = QPushButton('Adjust boundaries', self)
         self.bLetme.clicked.connect(self.letme)
 
 
@@ -533,7 +533,7 @@ class Window(QWidget):
 
     def letme(self):
         # Yea
-        self.bYea = QPushButton('Yeah', self)
+        self.bYea = QPushButton('Accept', self)
         self.bYea.clicked.connect(self.yea)
 
         self.reg = pg.LinearRegionItem()
