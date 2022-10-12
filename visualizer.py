@@ -436,11 +436,11 @@ class Window(QWidget):
 
 	        typee= [self.selected_type]
 	        if typee[0]== "both":
-	            typee=[1,3]
+	            typee=[1,2]
 	        if typee[0]=='deletion':
 	        	typee=[1]
 	        if typee[0]=='duplication':
-	        	typee=[3]
+	        	typee=[2]
 
 
 	        condition= (self.selected_condition)
@@ -459,7 +459,7 @@ class Window(QWidget):
 
 	        self.x= 0
 	        #self.df2= self.df.loc[self.df['locus'].isin(selectedLoci) & self.df['Visual'].isin(condition) & self.df['Type'].isin(typee)]
-	        self.df2= self.df.loc[self.df['locus'].isin(selectedLoci) & self.df['CN'].isin(typee)]
+	        self.df2= self.df.loc[self.df['locus'].isin(selectedLoci) & self.df['GT'].isin(typee)]
 	        self.df2=self.df2.reset_index()
 	        self.df2[['Visual_Output']]=-9
 	        self.last= self.df2.shape[0]
