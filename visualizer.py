@@ -30,7 +30,7 @@ def tabix_query(filename, chrom, start, end):
         yield line.strip().split()
 
 
-print ('Number of arguments:', len(sys.argv), 'arguments.')
+#print ('Number of arguments:', len(sys.argv), 'arguments.')
 print ('Argument List:', str(sys.argv))
 
 
@@ -42,8 +42,8 @@ loci_coordinates= wkdir+str(sys.argv[3])
 keyFile = wkdir+str(sys.argv[4])
 LRRtype = str(sys.argv[5])
 
-print(cnv_calls)
-print(loci_coordinates)
+#print(cnv_calls)
+#print(loci_coordinates)
 
 # Main Window
 class Window(QWidget):
@@ -230,8 +230,8 @@ class Window(QWidget):
       stopX= cnv.end
       # map the id to file path
       idX=(cnv.sample_ID)
-      print('chr CNV:')
-      print(chrX)
+      #print('chr CNV:')
+      #print(chrX)
 
       cnvSample=self.keyFile.loc[self.keyFile['sample_ID'].isin([idX])]
       print("Mapped cnvSample Key file:")
@@ -243,7 +243,7 @@ class Window(QWidget):
       #print('########Path 2 is:')
       #print(path2)
       #pathFull=self.mergePath(wd2,path2)
-      print(pathFull)
+      #print(pathFull)
 
       try: 
         SampleRaw = pd.DataFrame(tabix_query(pathFull,str(chrX), 0, int(250e6))) # To get the entire chr
@@ -262,36 +262,36 @@ class Window(QWidget):
         SampleRaw=SampleRaw.rename({0:'chr',1:'Pos',2:'Pos2',3:'LRRt',4:'BAF',5:'LRR'},axis=1)
 		
       SampleRaw=SampleRaw.dropna(axis=0, thresh=1) # Remove rows with any columns with NaN
-      print('testing............')
+      #print('testing............')
       print(SampleRaw)      
       SampleRaw.Pos=SampleRaw.Pos.astype(float)
       cnvRegion=SampleRaw.loc[SampleRaw['Pos'].isin(range(startX,stopX))]
-      print('pass1')
+      #print('pass1')
       cnvRegion[['Status']]=1
       extend= (1000-cnvRegion.shape[0])//2
-      print('pass2')
+      #print('pass2')
       pre=SampleRaw.loc[SampleRaw['Pos']<startX].tail(extend)
       pos=SampleRaw.loc[SampleRaw['Pos']>stopX].head(extend)
       pre[['Status']]=0
       pos[['Status']]=0
-      print('pass3')
+      #print('pass3')
       cnvArray=pd.concat([pre,cnvRegion,pos])
       cnvArray= cnvArray.reset_index() 
-      print(list(cnvArray.Pos))
-      print('pass4')
+      #print(list(cnvArray.Pos))
+      #print('pass4')
       cnvArray[['locus']]= str(cnv.locus)
       cnvArray.loc[(cnvArray.LRR == 'NaN'),'LRR']='0'
       cnvArray.loc[(cnvArray.BAF == 'NaN'),'BAF']='0'
-      print('pass5')
-      print(cnvArray[["LRR", "BAF"]] )
+      #print('pass5')
+      #print(cnvArray[["LRR", "BAF"]] )
       cnvArray[["LRR", "BAF"]] = cnvArray[["LRR", "BAF"]].apply(pd.to_numeric)
-      print('pass6')
+      #print('pass6')
       cnvArray.loc[(cnvArray.LRR > 1),'LRR']=0.99
-      print('pass7')
+      #print('pass7')
       cnvArray.loc[(cnvArray.LRR < -1.5),'LRR']= -1.5
-      print('pass8')
-      print('xabi test 1')
-      print(cnvArray)
+      #print('pass8')
+      #print('xabi test 1')
+      #print(cnvArray)
       return(cnvArray)
 
 
@@ -463,8 +463,8 @@ class Window(QWidget):
 	        self.df2=self.df2.reset_index()
 	        self.df2[['Visual_Output']]=-9
 	        self.last= self.df2.shape[0]
-	        print('Dataframe to check for CNVs:')
-	        print(self.df2)
+            #print('Dataframe to check for CNVs:')
+            #print(self.df2)
 
 	        
         if self.fname !=0:
@@ -480,10 +480,10 @@ class Window(QWidget):
 
 
         #2. Tabix first sample 
-        print(self.df2.loc[self.x])
+        #print(self.df2.loc[self.x])
         self.cnvX= self.getCNVarray(self.df2.loc[self.x])
-        print('Check first array for ploting:')
-        print(self.cnvX)
+        #print('Check first array for ploting:')
+        #print(self.cnvX)
 
         #3. Plot first sample
         self.PlotSample(self.cnvX)
@@ -509,8 +509,8 @@ class Window(QWidget):
         if self.x != self.last: 
            # 2b.1. Tabix xth sample 
            self.cnvX= self.getCNVarray(self.df2.loc[self.x])
-           print('Check samples data frame')
-           print(self.df2)
+           #print('Check samples data frame')
+           #print(self.df2)
            # 2b.2. Plot xth sample
            self.PlotSample(self.cnvX, start1=True)
 
